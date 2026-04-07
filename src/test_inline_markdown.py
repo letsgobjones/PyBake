@@ -283,58 +283,57 @@ This is the same paragraph on a new line
             ],
         )
 
-
-def test_markdown_to_blocks_newlines(self):
-    md = """
+    def test_markdown_to_blocks_newlines(self):
+        md = """
 # This is a heading
 
 
-This is a paragraph
+    This is a paragraph
 
 
-- This is a list
-"""
-    blocks = markdown_to_blocks(md)
-    self.assertEqual(
-        blocks,
-        [
-            "# This is a heading",
-            "This is a paragraph",
-            "- This is a list",
-        ],
-    )
+    - This is a list
+    """
+        blocks = markdown_to_blocks(md)
+        self.assertEqual(
+            blocks,
+            [
+                "# This is a heading",
+                "This is a paragraph",
+                "- This is a list",
+            ],
+        )
+
+    def test_markdown_to_blocks_whitespace(self):
+        md = """
+    Block 1   
 
 
-def test_markdown_to_blocks_whitespace(self):
-    md = """
-Block 1   
+    Block 2
+    """
+        blocks = markdown_to_blocks(md)
+        self.assertEqual(
+            blocks,
+            ["Block 1", "Block 2"],
+        )
 
+    def test_markdown_to_blocks_single(self):
+        md = "Just a single line."
+        blocks = markdown_to_blocks(md)
+        self.assertEqual(
+            blocks,
+            ["Just a single line."],
+        )
 
-Block 2
-"""
-    blocks = markdown_to_blocks(md)
-    self.assertEqual(
-        blocks,
-        ["Block 1", "Block 2"],
-    )
+    def test_markdown_to_blocks_empty(self):
+        md = """
 
-
-def test_markdown_to_blocks_single(self):
-    md = "Just a single paragraph."
-    blocks = markdown_to_blocks(md)
-    self.assertEqual(blocks, ["Just a single line."])
-
-
-def test_markdown_to_blocks_empty(self):
-    md = """
-
-
-"""
-    blocks = markdown_to_blocks(md)
-    self.assertEqual(
-        blocks,
-        [],
-    )
+ 
+    """
+        blocks = markdown_to_blocks(md)
+        self.assertEqual(
+            blocks,
+            [],
+        )
 
 
 if __name__ == "__main__":
